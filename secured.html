@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secured Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="validation.js" defer></script>
+</head>
+<body>
+    <div class="wrapper home">
+        <p>Welcome, <span id="userGreeting"></span>!</p>
+        <p>Access granted to view the Contents</p>
+        <a href="index.html">Home</a>
+        <button id="logoutButton">Logout</button>
+    </div>
+
+    <script>
+        if (localStorage.getItem('loggedIn') !== 'true') {
+            alert('You must be logged in to view this page.');
+            window.location.href = 'login.html';
+        } else {
+            const username = localStorage.getItem('username');
+            document.getElementById('userGreeting').textContent = username;
+        }
+
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            localStorage.removeItem('loggedIn');
+            alert('Logged out successfully!');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
